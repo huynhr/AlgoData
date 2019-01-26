@@ -6,6 +6,7 @@ var should = chai.should();
 const {
   validAnagram,
   countUniqueValues,
+  maxSubArraySum,
 } = require('../algorithms/patterns');
 
 describe('Frequency Counting Pattern(s)', () => {
@@ -54,10 +55,15 @@ describe('Multiple Pointers Pattern(s)', () => {
 
 describe('Sliding Windows Pattern', () => {
 
-  describe('Count unique values', () => {
-    it('Should equal 3', () => {
-      const output = countUniqueValues([-1, -1, 0, 0, 3]);
-      expect(output).to.be.equal(3);
+  describe('Max sub array sum', () => {
+    it('Should equal 8', () => {
+      const output = maxSubArraySum([1, 2, 6, 1, 6], 2);
+      expect(output).to.be.equal(8);
+    });
+
+    it('Should equal null', () => {
+      const output = maxSubArraySum([], 2);
+      expect(output).to.be.equal(null);
     });
   });
 

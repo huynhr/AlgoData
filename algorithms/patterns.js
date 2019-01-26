@@ -63,3 +63,37 @@ exports.countUniqueValues = function countUniqueValues(numbers) {
   }
   return i + 1;
 }
+
+/*
+Given an array of numbers, find the max sum of n numbers
+input: array of numbers a number representing sequential addition
+output: the max number
+Plan: To use the sliding window pattern
+sum up the sequential numbers, then move one level up and subtract the previous last value and add the new index value
+[1, 2, 6, 1, 6] num = 2
+- we start at index of the num
+[1, 2, 6, 1, 6] ==> 1 + 2 = 3 maxSum = 3
+ -  - 
+[1, 2, 6, 1, 6] ==> maxSum last index 3 - 1 + 6 = 8   maxSum = 8;
+    -  - 
+[1, 2, 6, 1, 6] ==> maxSum last index 8 - 2 + 1 = 7   maxSum = 8;
+       -  - 
+[1, 2, 6, 1, 6] ==> maxSum last index 7 - 6 + 6 = 7   maxSum = 8;
+          -  - 
+This algorithm is a window because as it slides along the array of numbers it adjusts what values need to be inside of it.
+*/
+exports.maxSubArraySum = function maxSubArraySum(arr, num) {
+  if (arr.length === 0) return null;
+  let tempSum = 0;
+  let maxSum = 0;
+  for (let i = 0; i < num; i++) {
+    maxSum += arr[i];
+  }
+  tempSum = maxSum;
+  for (let i = num; i < arr.length; i++) {
+    let currentValue = arr[i];
+    tempSum = tempSum + currentValue - arr[i - num];
+    maxSum = Math.max(tempSum, maxSum);
+  }
+  return maxSum;
+}
