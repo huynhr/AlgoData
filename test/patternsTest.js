@@ -10,6 +10,7 @@ const {
   sameFrequency,
   areThereDuplicates,
   averagePair,
+  isSubsequence,
 } = require('../algorithms/patterns');
 
 describe('Frequency Counting Pattern(s)', () => {
@@ -99,7 +100,22 @@ describe('Multiple Pointers Pattern(s)', () => {
       const output = averagePair([-2, -1, 3, 4, 5, 6, 7], 2);
       expect(output).to.be.true;
     });
-  })
+  });
+
+  describe('Is Subsequence', () => {
+    it('Should equal true', () => {
+      const output = isSubsequence('hello', 'hello world');
+      expect(output).to.be.true;
+    });
+    it('Should equal true', () => {
+      const output = isSubsequence(' cat', 'the dog and the ca dog t');
+      expect(output).to.be.true;
+    });
+    it('Should equal false', () => {
+      const output = isSubsequence('blue', 'the sky is red');
+      expect(output).to.be.false;
+    });
+  });
 });
 
 

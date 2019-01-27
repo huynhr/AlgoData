@@ -184,3 +184,25 @@ exports.averagePair = function averagePair(numbers, targetAvg) {
   }
   return false;
 }
+
+/**
+ * Given two strings, check if letters in first string appear in letters in the second string
+ * inputs: two strings
+ * output: boolean true of false
+ * hello AND world he hello
+ * Plan: iterate through the second string and if if find a letter I'll keep count if the letters match and count down
+ * if they don't match then restart the count
+ */
+
+// ' cat', 'the dog and the ca dog t'
+exports.isSubsequence = function isSubsequence(string1, string2) {
+  let subStringLength = 0;
+  for (let i = 0; i <= string2.length; i++) {
+    if (subStringLength === string1.length) return true;
+    const currentLetter = string2[i];
+    if (currentLetter === string1[subStringLength]) {
+      subStringLength++;
+    }
+  }
+  return false;
+}
