@@ -8,6 +8,7 @@ const {
   countUniqueValues,
   maxSubArraySum,
   sameFrequency,
+  areThereDuplicates,
 } = require('../algorithms/patterns');
 
 describe('Frequency Counting Pattern(s)', () => {
@@ -45,8 +46,19 @@ describe('Frequency Counting Pattern(s)', () => {
       const output = sameFrequency(12340, 4317);
       expect(output).to.be.false;
     });
+  });
 
-  })
+  describe('Are there duplicates', () => {
+    it('It should equal false', () => {
+      const output = areThereDuplicates(1, 2, 3);
+      expect(output).to.be.false;
+    });
+
+    it('It should equal true', () => {
+      const output = areThereDuplicates('a', 'b', 'b', 'c');
+      expect(output).to.be.true;
+    });
+  });
 
 });
 
@@ -68,7 +80,6 @@ describe('Multiple Pointers Pattern(s)', () => {
       expect(output).to.be.equal(8);
     });
   });
-
 });
 
 

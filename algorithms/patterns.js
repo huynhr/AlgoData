@@ -106,8 +106,6 @@ exports.maxSubArraySum = function maxSubArraySum(arr, num) {
  * Plan: convert the numbers to strings and then add num1 to a look up object. Compare
  * num2 to num1 to make sure they equal
  */
-
-
 exports.sameFrequency = function sameFrequency(num1, num2) {
   const num1String = num1 + '';
   const num2String = num2 + '';
@@ -127,4 +125,25 @@ exports.sameFrequency = function sameFrequency(num1, num2) {
     }
   }
   return true;
+}
+
+/**
+ * Given arguments string or numbers, are there duplicates?
+ * input: numbers or strings
+ * output: true or false boolean
+ * Plan: use the pointers method 
+ * [1, 2, 3, 4, 5, 5, 6];
+ *     -  - 
+ */
+exports.areThereDuplicates = function areThereDuplicates() {
+  const args = [...arguments];
+  let lookup = {};
+  for (let item of args) {
+    if (lookup[item]) {
+      return true;
+    } else {
+      lookup[item] = (lookup[item] || 0) + 1;
+    }
+  }
+  return false;
 }
