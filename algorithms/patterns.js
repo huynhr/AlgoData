@@ -97,3 +97,34 @@ exports.maxSubArraySum = function maxSubArraySum(arr, num) {
   }
   return maxSum;
 }
+
+/**
+ * Same Frequency Of digits
+ * Given two numbers check if their frequencies equal
+ * input: two numbers
+ * output: true or false boolean
+ * Plan: convert the numbers to strings and then add num1 to a look up object. Compare
+ * num2 to num1 to make sure they equal
+ */
+
+
+exports.sameFrequency = function sameFrequency(num1, num2) {
+  const num1String = num1 + '';
+  const num2String = num2 + '';
+
+  if (num1String.length !== num2String.length) return false;
+
+  let lookup = {};
+  for (let letter of num1String) {
+    lookup[letter] = (lookup[letter] || 0) + 1;
+  }
+
+  for (let letter of num2String) {
+    if (lookup[letter]) {
+      lookup[letter]--;
+    } else {
+      return false;
+    }
+  }
+  return true;
+}

@@ -7,6 +7,7 @@ const {
   validAnagram,
   countUniqueValues,
   maxSubArraySum,
+  sameFrequency,
 } = require('../algorithms/patterns');
 
 describe('Frequency Counting Pattern(s)', () => {
@@ -28,6 +29,24 @@ describe('Frequency Counting Pattern(s)', () => {
       expect(output).to.be.equal(false);
     });
   });
+
+  describe('Same Frequencies of numbers', () => {
+    it('Should be true', () => {
+      const output = sameFrequency(1234, 4312);
+      expect(output).to.be.true;
+    });
+    
+    it('Should be false', () => {
+      const output = sameFrequency(1234, 4317);
+      expect(output).to.be.false; 
+    });
+    
+    it('Should be false', () => {
+      const output = sameFrequency(12340, 4317);
+      expect(output).to.be.false;
+    });
+
+  })
 
 });
 
