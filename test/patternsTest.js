@@ -9,10 +9,10 @@ const {
   maxSubArraySum,
   sameFrequency,
   areThereDuplicates,
+  averagePair,
 } = require('../algorithms/patterns');
 
 describe('Frequency Counting Pattern(s)', () => {
-
   describe('Valid Anagrams', () => {
     it('Should be true', () => {
       const output = validAnagram('racecar', 'carrace');
@@ -59,11 +59,9 @@ describe('Frequency Counting Pattern(s)', () => {
       expect(output).to.be.true;
     });
   });
-
 });
 
 describe('Multiple Pointers Pattern(s)', () => {
-
   describe('Count unique values', () => {
     it('Should equal 3', () => {
       const output = countUniqueValues([-1, -1, 0, 0, 3]);
@@ -80,11 +78,32 @@ describe('Multiple Pointers Pattern(s)', () => {
       expect(output).to.be.equal(8);
     });
   });
+
+  describe('Average Pair', () => {
+    it('Should equal true', () => {
+      const output = averagePair([1, 2, 3, 4], 2.5);
+      expect(output).to.be.true;
+    });
+
+    it('Should equal false', () => {
+      const output = averagePair([1, 3, 5, 6, 7], 3.1);
+      expect(output).to.be.false;
+    });
+
+    it('Should equal false', () => {
+      const output = averagePair([], 2);
+      expect(output).to.be.false;
+    });
+
+    it('Should equal true', () => {
+      const output = averagePair([-2, -1, 3, 4, 5, 6, 7], 2);
+      expect(output).to.be.true;
+    });
+  })
 });
 
 
 describe('Sliding Windows Pattern', () => {
-
   describe('Max sub array sum', () => {
     it('Should equal 8', () => {
       const output = maxSubArraySum([1, 2, 6, 1, 6], 2);
@@ -96,5 +115,4 @@ describe('Sliding Windows Pattern', () => {
       expect(output).to.be.equal(null);
     });
   });
-
 });

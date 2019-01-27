@@ -147,3 +147,40 @@ exports.areThereDuplicates = function areThereDuplicates() {
   }
   return false;
 }
+
+/**
+ * Given a an array of sorted numbers find a pair that have an average of the target average
+ * input: an array of sorted numbers and a target average number
+ * output: boolean true or false
+ * [1, 2, 3, 4] 2.5 => true because (2 + 3) = 5 / 2
+ * [1, 3, 5, 6, 7] 1.3 => false because none
+ * plan: how can I dynamically check all the values as I go?
+ * [1, 3, 5, 6, 7] target = 3   => true  1 + 5
+ *  -           -                
+ * Plan: to have the pointers on the ends
+ * Check to see if the average is higher or lower than the target average
+ * if the target average is higher than we would move the left pointer up
+ * if the target average is lower than we would move the right pointer down
+ * [1, 2, 3, 4, 5, 6] 2.5
+ *  -              - => avg(6, 1) = 3.5 > 2.5 so move right down
+ * [1, 2, 3, 4, 5, 6] 2.5
+ *  -           -    => avg(5, 1) = 3 > 2.5 so move right down    
+ * [1, 2, 3, 4, 5, 6] 2.5
+ *  -        -       => avg(4, 1) = 5 > 2.5 return true
+ */
+exports.averagePair = function averagePair(numbers, targetAvg) {
+  if (numbers.length === 0) return false;
+  let lowerBounds = 0;
+  let higherBounds = numbers.length - 1;
+  while (lowerBounds < higherBounds) {
+    const average = (numbers[lowerBounds] + numbers[higherBounds]) / 2;
+    if (average === targetAvg) {
+      return true;
+    } else if (average > targetAvg) {
+      higherBounds--;
+    } else {
+      lowerBounds++;
+    }
+  }
+  return false;
+}
