@@ -82,8 +82,8 @@ sum up the sequential numbers, then move one level up and subtract the previous 
           -  - 
 This algorithm is a window because as it slides along the array of numbers it adjusts what values need to be inside of it.
 */
-exports.maxSubArraySum = function maxSubArraySum(arr, num) {
-  if (arr.length === 0) return null;
+exports.maxSubarraySum = function maxSubarraySum(arr, num) {
+  if (arr.length === 0 || arr.length < num) return null;
   let tempSum = 0;
   let maxSum = 0;
   for (let i = 0; i < num; i++) {
@@ -205,4 +205,81 @@ exports.isSubsequence = function isSubsequence(string1, string2) {
     }
   }
   return false;
+}
+
+/**
+ * Given an array of + integers and an integer x, return the length of a sub array where their sum 
+ * is equal to or greater than x
+ * input: a positive integer
+ * output: a positive integer of the length of a subarray that is equal to or greater than x
+ * Example:
+ * [1, 4, 5, 7] 9  returns 2 (4 + 5);
+ * [1, 3, 6, 9, 10, 0] 11 
+ *  finds (1, 3, 6, 9 ) (6 + 9) (9 + 3) (10 + 1 [3, 6, 9])
+ * plan:
+ * [8, 3, 5, 1, 10, 3] 20
+ * sort the array
+ * [1, 3, 3, 5, 8, 10]
+ *  Sort the array in desc. order
+ * if the first number is greater than we return 1
+ * otherwise continue adding the subarray's until the number is greater than or equal to x 
+ */
+exports.minSubArrayLen = function minSubArrayLen(arr, num) {
+  if (arr.length === 0) return 0;
+  const descArr = arr.sort((a, b) => {
+    if (a < b) return 1;
+    if (a > b) return -1;
+    return 0;
+  });
+  let currentSum = 0;
+  let currentLen = 0;
+  for (let i = 0; i < descArr.length; i++) {
+    const currentNum = descArr[i];
+    if (currentNum >= num) {
+      return 1;
+    }
+    if (currentSum >= num) {
+      return currentLen;
+    }
+    currentSum += currentNum;
+    currentLen++;
+  }
+  return 0;
+}
+
+/**
+ * Given a string, find the longest substring with unique characters
+ * input: a string of characters
+ * output: a number of the longest substring of unique characters
+ * [a, b, c, c, d] 3
+ * [a, b, d, e, t, e, s, e, r, r]
+ * [a, b, d, e, t, e, b, s, e, r, r]
+ * Plan: Keep a look up table with letter and index if occurrence
+ * Continually add to the letters until I find a letter that already exists,
+ * if it already exists then return the iterator back to the previous existing letter and continue
+ * and also restart the look up object
+ */
+exports.findLongestSubstring = function findLongestSubstring(str) {
+  if (str.length === 0) return 0;
+  let lookup = {};
+  let longest = 0 
+  let tempLongest = 0;
+  for (let i = 0; i < str.length; i++) {
+    const currentLetter = str[i];
+    if (lookup[currentLetter] !== undefined) {
+      const newLetterIndex = lookup[currentLetter] + 1;
+      const newLetter = str[newLetterIndex];
+      lookup = {
+        [newLetter]: newLetterIndex,
+      }
+      tempLongest = 1;
+      i = newLetterIndex;
+
+    } else {
+      lookup[currentLetter] = i;
+      tempLongest++;
+      longest = Math.max(tempLongest, longest);
+    }
+  }
+  return longest;
 }

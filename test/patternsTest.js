@@ -6,11 +6,13 @@ var should = chai.should();
 const {
   validAnagram,
   countUniqueValues,
-  maxSubArraySum,
+  maxSubarraySum,
   sameFrequency,
   areThereDuplicates,
   averagePair,
   isSubsequence,
+  minSubArrayLen,
+  findLongestSubstring,
 } = require('../algorithms/patterns');
 
 describe('Frequency Counting Pattern(s)', () => {
@@ -122,13 +124,50 @@ describe('Multiple Pointers Pattern(s)', () => {
 describe('Sliding Windows Pattern', () => {
   describe('Max sub array sum', () => {
     it('Should equal 8', () => {
-      const output = maxSubArraySum([1, 2, 6, 1, 6], 2);
+      const output = maxSubarraySum([1, 2, 6, 1, 6], 2);
       expect(output).to.be.equal(8);
     });
-
     it('Should equal null', () => {
-      const output = maxSubArraySum([], 2);
+      const output = maxSubarraySum([], 2);
       expect(output).to.be.equal(null);
+    });
+    it('Should equal null', () => {
+      const output = maxSubarraySum([1, 4, 5], 4);
+      expect(output).to.be.equal(null);
+    });
+  });
+
+  describe('Min Sub array length', () => {
+    it('Should equal 2', () => {
+      const output = minSubArrayLen([8, 3, 5, 1, 10, 3], 20);
+      expect(output).to.be.equal(3);
+    });
+    it('Should equal 0', () => {
+      const output = minSubArrayLen([8, 3, 5, 1, 10, 3], 90);
+      expect(output).to.be.equal(0);
+    });
+    it('Should equal 1', () => {
+      const output = minSubArrayLen([8, 3, 5, 1, 10, 3], 10);
+      expect(output).to.be.equal(1);
+    });
+  });
+
+  describe('Find longest substring', () => {
+    it('Should equal 3', () => {
+      const output = findLongestSubstring('abccd');
+      expect(output).to.be.equal(3);
+    });
+    it('Should equal 5', () => {
+      const output = findLongestSubstring('abdeteserr');
+      expect(output).to.be.equal(5);
+    });
+    it('Should equal 5', () => {
+      const output = findLongestSubstring('abeebswerr');
+      expect(output).to.be.equal(5);
+    });
+    it('Should equal 7', () => {
+      const output = findLongestSubstring('thecatinthehat');
+      expect(output).to.be.equal(7);
     });
   });
 });
