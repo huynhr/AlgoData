@@ -11,7 +11,7 @@ describe('Sorting Algorithms', () => {
   describe('BubbleSort', () => {
     it('Expected to equal [ 1, 4, 6, 7, 10, 34 ]', () => {
       const output = bubbleSort([4, 1, 7, 10, 34, 6]);
-      expect(output).to.be.equal([1, 4, 6, 7, 10, 34]);
+      expect(output).to.eql([1, 4, 6, 7, 10, 34]);
     });
   });
 });
