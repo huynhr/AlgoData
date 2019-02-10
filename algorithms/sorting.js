@@ -109,33 +109,6 @@ exports.insertionSort = function(arr) {
  * Plan is to iterate through the longer arr and compare which number is smaller and add it to a new array
  * 
  */
-// function merge(arr1, arr2) {
-//   let largerEnd = [...arr1];
-//   let smallerEnd = [...arr2];
-//   let outputArray = [];
-//   if (arr1[arr1.length - 1] > arr2[arr2.length - 1]) {
-//     largerEnd = arr1;
-//     smallerEnd = arr2;
-//   } else if (arr1[arr1.length - 1] < arr2[arr2.length - 1]) {
-//     largerEnd = arr2;
-//     smallerEnd = arr1;
-//   } 
-//   while(largerEnd.length !== 0) {
-//     const largerEndValue = largerEnd[0];
-//     const smallerEndValue = smallerEnd[0];
-//     if (largerEndValue < smallerEndValue) {
-//       const value = largerEnd.shift();
-//       outputArray.push(value);
-//     } else if (largerEndValue > smallerEndValue) {
-//       const value = smallerEnd.shift();
-//       outputArray.push(value);
-//     } else {
-//       const value = largerEnd.shift();
-//       outputArray.push(value);
-//     }
-//   }
-//   return outputArray;
-// }
 
 function merge(arr1, arr2) {
   let i = 0;
@@ -162,5 +135,48 @@ function merge(arr1, arr2) {
   return output;
 }
 
-// console.log(merge([], [2, 14]));
-// console.log(merge([1, 10, 50, 80, 1000], [2, 14, 50, 99, 100, 1001]));
+/**
+ * input: array of unsorted numbers
+ * output: array of sorted numbers
+ * plan: Break the arrays up into pieces recursively then construct them back together
+ * */
+
+exports.mergeSort = function mergeSort(arr) {
+  if (arr.length === 1) {
+    return arr;
+  }
+  const middlePoint = Math.floor((arr.length - 1)/2);
+  const leftSide = arr.slice(0, middlePoint + 1);
+  const rightSide = arr.slice(middlePoint + 1);
+
+  const arrLeft = mergeSort(leftSide);
+  const arrRight = mergeSort(rightSide);
+
+  return merge(arrLeft, arrRight);
+}
+
+const randomArray = function() {
+  let output = [];
+  for (let i = 0; i < 1000000; i++) {
+    output.push(Math.random() * 100);
+  }
+  return output;
+}
+
+
+function pivot(arr, start = 0, end = arr.length) {
+  let pivotIndex = start;
+  const startNumber = arr[start];
+  for (let i = start + 1; i < end; i++) {
+    const currentNumber = arr[i];
+    if (currentNumber < startNumber) {
+      // We always know what to switch because if there's a number a head of the pivot index that isn't smaller than the
+      // current number then it will be swapped no matter what
+      // if there all consecutive then it doesn't matter it will swap it in place
+      pivotIndex++;
+      swap(arr, pivotIndex, i);
+    }
+  }
+  swap(arr, start, pivotIndex);
+  return pivotIndex;
+}
