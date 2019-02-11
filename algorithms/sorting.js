@@ -85,20 +85,6 @@ exports.insertionSort = function(arr) {
   }
   return sortedArr;
 }
-// exports.insertionSort = function(arr) {
-//   let sortedArr = [...arr];
-//   for (let i = 1; i < sortedArr.length; i++) {
-//    for (let j = 0; j <= i; j++) {
-//      const currentValue = sortedArr[i];
-//      const comparedValue = sortedArr[j];
-//      if (currentValue < comparedValue) {
-//        sortedArr.splice(i, 1);
-//        sortedArr.splice(j, 0, currentValue);
-//      }
-//    }
-//   }
-//   return sortedArr;
-// }
 
 /**
  * input: two arrays of sorted numbers
